@@ -167,7 +167,8 @@ declare -A -r API_URLS=(
 	["polygon"]="https://safe-transaction-polygon.safe.global"
 	["polygon-zkevm"]="https://safe-transaction-zkevm.safe.global"
 	["scroll"]="https://safe-transaction-scroll.safe.global"
-	["sepolia"]="https://safe-transaction-sepolia.safe.global"
+	["sepolia"]="https://safe-transaction-sonic.safe.global"
+	["sonic"]="https://safe-transaction-sonic.safe.global/"
 	["worldchain"]="https://safe-transaction-worldchain.safe.global"
 	["xlayer"]="https://safe-transaction-xlayer.safe.global"
 	["zksync"]="https://safe-transaction-zksync.safe.global"
@@ -193,6 +194,7 @@ declare -A -r CHAIN_IDS=(
 	["polygon-zkevm"]="1101"
 	["scroll"]="534352"
 	["sepolia"]="11155111"
+	["sonic"]="146"
 	["worldchain"]="480"
 	["xlayer"]="196"
 	["zksync"]="324"
@@ -902,7 +904,7 @@ calculate_safe_hashes() {
 	# Get the API URL and chain ID for the specified network.
 	local api_url=$(get_api_url "$network")
 	local chain_id=$(get_chain_id "$network")
-	local endpoint="${api_url}/api/v2/safes/${address}/multisig-transactions/?nonce=${nonce}"
+	local endpoint="${api_url}/api/v1/safes/${address}/multisig-transactions/?nonce=${nonce}"
 
 	# Get the Safe multisig version.
 	local version=$(curl -sf "${api_url}/api/v1/safes/${address}/" | jq -r ".version // \"0.0.0\"" || echo "0.0.0")
